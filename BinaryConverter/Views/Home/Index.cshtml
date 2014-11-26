@@ -1,0 +1,160 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<div id="binary-converter" class="application-page full-height">
+    <div class="converter-box">
+        <dl class="full">
+            <dt>Decimal</dt>
+            <dd><input id="decimal-input" type="text" placeholder="ex. 512 1024 30"/></dd>
+        </dl>
+        
+        <dl class="full">
+            <dt>Binary</dt>
+            <dd><input id="binary-input" type="text" placeholder="ex. 1100100 0000100 00100"/></dd>
+        </dl>
+
+        <dl class="full">
+            <dt>Hexadecimal</dt>
+            <dd><input id="hex-input" type="text"/></dd>
+        </dl>
+
+        <dl class="full">
+            <dt>Octo</dt>
+            <dd><input id="octo-input" type="text"/></dd>
+        </dl>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $('#decimal-input').keyup(function () {
+        var decimalStringArray = $(this).val().split(" ");
+        $('#binary-input').val(decimalToBinary(decimalStringArray));
+        $('#hex-input').val(decimalToHex(decimalStringArray));
+        $('#octo-input').val(decimalToOcto(decimalStringArray));
+    });
+
+    $('#binary-input').keyup(function () {
+        var binaryStringArray = $(this).val().split(" ");
+        $('#decimal-input').val(binaryToDecimal(binaryStringArray));
+
+        var decimalStringArray = $('#decimal-input').val().split(" ");
+        $('#hex-input').val(decimalToHex(decimalStringArray));
+        $('#octo-input').val(decimalToOcto(decimalStringArray));
+    });
+
+    $('#hex-input').keyup(function () {
+        var hexStringArray = $(this).val().split(" ");
+        $('#decimal-input').val(hexToDecimal(hexStringArray));
+
+        var decimalStringArray = $('#decimal-input').val().split(" ");
+        $('#binary-input').val(decimalToBinary(decimalStringArray));
+        $('#octo-input').val(decimalToOcto(decimalStringArray));
+    });
+
+    $('#octo-input').keyup(function () {
+        var octoStringArray = $(this).val().split(" ");
+        $('#decimal-input').val(octoToDecimal(octoStringArray));
+
+        var decimalStringArray = $('#decimal-input').val().split(" ");
+        $('#binary-input').val(decimalToBinary(decimalStringArray));
+        $('#hex-input').val(decimalToHex(decimalStringArray));
+    });
+
+    function decimalToBinary(decimalStringArray) {
+        var binaryResultString = "";
+        for (var i = 0; i < decimalStringArray.length; i++) {
+            if (decimalStringArray[i] != "") {
+                var binary = Number(decimalStringArray[i]).toString(2);
+                binaryResultString = binaryResultString + binary;
+
+                if (i < decimalStringArray.length - 1) {
+                    binaryResultString = binaryResultString + " ";
+                }
+            }
+        }
+
+        return binaryResultString;
+    }
+
+    function decimalToHex(decimalStringArray) {
+        var hexResultString = "";
+        for (var i = 0; i < decimalStringArray.length; i++) {
+            if (decimalStringArray[i] != "") {
+                var hex = Number(decimalStringArray[i]).toString(16);
+                hexResultString = hexResultString + hex;
+
+                if (i < decimalStringArray.length - 1) {
+                    hexResultString = hexResultString + " ";
+                }
+            }
+        }
+
+        return hexResultString;
+    }
+
+    function decimalToOcto(decimalStringArray) {
+        var octoResultString = "";
+        for (var i = 0; i < decimalStringArray.length; i++) {
+            if (decimalStringArray[i] != "") {
+                var octo = Number(decimalStringArray[i]).toString(8);
+                octoResultString = octoResultString + octo;
+
+                if (i < decimalStringArray.length - 1) {
+                    octoResultString = octoResultString + " ";
+                }
+            }
+        }
+
+        return octoResultString;
+    }
+
+    function binaryToDecimal(binaryStringArray) {
+        var decimalResultString = "";
+        for (var i = 0; i < binaryStringArray.length; i++) {
+            if (binaryStringArray[i] != "") {
+                var decimalNumber = parseInt(binaryStringArray[i], 2).toString();
+                decimalResultString = decimalResultString + decimalNumber;
+
+                if (i < binaryStringArray.length - 1) {
+                    decimalResultString = decimalResultString + " ";
+                }
+            }
+        }
+
+        return decimalResultString;
+    }
+
+    function hexToDecimal(hexStringArray) {
+        var decimalResultString = "";
+        for (var i = 0; i < hexStringArray.length; i++) {
+            if (hexStringArray[i] != "") {
+                var decimalNumber = parseInt(hexStringArray[i], 16).toString();
+                decimalResultString = decimalResultString + decimalNumber;
+
+                if (i < hexStringArray.length - 1) {
+                    decimalResultString = decimalResultString + " ";
+                }
+            }
+        }
+
+        return decimalResultString;
+    }
+
+    function octoToDecimal(octoStringArray) {
+        var decimalResultString = "";
+        for (var i = 0; i < octoStringArray.length; i++) {
+            if (octoStringArray[i] != "") {
+                var decimalNumber = parseInt(octoStringArray[i], 8).toString();
+                decimalResultString = decimalResultString + decimalNumber;
+
+                if (i < octoStringArray.length - 1) {
+                    decimalResultString = decimalResultString + " ";
+                }
+            }
+        }
+
+        return decimalResultString;
+    }
+
+</script>
